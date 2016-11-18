@@ -1,0 +1,37 @@
+ <html>    
+<head> 
+<title>AngularJS Factory </title>    
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js">    
+</script>   
+   <script src="script.js"></script>
+   
+</head>    
+<body style="background-color:#DDE4E9;">    
+<fieldset style="background-color:#DDE4E9;">          
+    <legend>AngulerJS Factory Example</legend>       
+<div ng-app="app">    
+    <div ng-controller="CalculatorController">    
+        Enter a number:    
+        <input ng-model="number" type="number">    
+        <button ng-click="doMultiply()">Multiply</button><br/> 
+  
+      Enter a number:  
+        <input ng-model="number" type="number">    
+        <button ng-click="doAddition()">Addition</button> <br/> 
+  
+      Enter a number:  
+        <input ng-model="number" type="number">    
+        <button ng-click="doSubstraction()">Substraction</button> <br/> 
+  
+      Enter a number:  
+        <input ng-model="number" type="number">    
+        <button ng-click="doDivision()">Division</button>  
+        
+      <p style="font-family:Arial;color:yellow;background:steelblue;padding:3px;width:350px;">   
+        Answer: {{answer}}</p>   
+    </div>    
+</div>    
+
+        </fieldset>   
+</body>    
+</html>  
