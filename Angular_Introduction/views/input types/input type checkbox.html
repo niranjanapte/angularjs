@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>  
+<head> 
+<title>AngularJS Imnput Type Checkbox Example</title>  
+<script SRC="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js">
+</script>
+  <script>
+      var app = angular.module('yourApp', [])
+      app.controller('InputTypeCheckBoxController', ['$scope', function ($scope) {
+          $scope.checkboxModel = {
+              value1: true,
+              value2: 'YES'
+          };
+      }]);
+  </script>
+</head>  
+<body style="background-color:#DDE4E9;">
+<fieldset style="background-color:#DDE4E9;">
+    <legend>AngulerJS Input Type Checkbox Example</legend>
+  <div ng-app="yourApp">
+<form name="myForm" ng-controller="InputTypeCheckBoxController">
+  <label>Value1:
+    <input type="checkbox" ng-model="checkboxModel.value1"
+           ng-true="'YES'" ng-false-value="'NO'">
+  </label><br/>
+  <label>Value2:
+    <input type="checkbox" ng-model="checkboxModel.value2" 
+           ng-true-value="'YES'" ng-false-value="'NO'">
+   </label><br/>
+  <span>value1 = {{checkboxModel.value1}}</span><br/>
+  <span>value2 = {{checkboxModel.value2}}</span><br/>
+ </form>
+ </div>
+   </fieldset>
+</body>  
+</html> 

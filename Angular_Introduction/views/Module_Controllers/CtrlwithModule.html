@@ -1,0 +1,24 @@
+﻿<html>  
+<head>  
+<title>Angular Controller with Module</title>  
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js">  
+</script>  
+<script>
+    //Defining Controller Using AngularJS Module  
+    var app = angular.module('myApp', []);
+    app.controller('CustomerController', function ($scope) {
+        $scope.customer = { name: "Jimi Scott", address: "12-13-283/A1", email: "Jimi@yahoo.com" };
+    });
+</script>  
+</head>  
+<body>  
+<div ng-app="myApp">  
+<div ng-controller="CustomerController">   
+<p>Customer Name : {{ customer.name }}</p>  
+<p>Customer Name : {{ customer.address }}</p>  
+<p>Customer Name : {{ customer.email }}</p>  
+  
+</div>  
+</div>  
+</body>  
+</html>

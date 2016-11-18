@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Automatic Initialization</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script> 
+    <script src="scripts/angular.min.js" type="text/javascript"></script>
+    </script>
+    <script>
+        var app = angular.module('automaticInitialization', [])
+        app.controller('autoInitController', ['$scope', function ($scope) {
+            $scope.url = "www.google.com"
+        }]);
+    </script>
+</head>
+
+<body style="background-color: #bbdefb;" ng-app="automaticInitialization">
+    <fieldset style="background-color: #e3f2fd;">
+        <legend><b>AngulerJS Automatic Initialization Example</b></legend>
+        <div ng-controller="autoInitController">
+            <p style="font-family: Arial; color: white; background: #42a5f5; padding: 3px; width: 350px;">{{url}}</p>
+        </div>
+    </fieldset>
+</body>
+
+</html>

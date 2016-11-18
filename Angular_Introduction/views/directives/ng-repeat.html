@@ -1,0 +1,32 @@
+﻿<html>  
+<head>  
+<title> AngularJS ng-repeat directive</title>  
+<script SRC="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js">  
+</script>  
+<script>
+    function appController($scope) {
+        $scope.students = [
+      { firstName: 'Jimi', lastName: 'Scotts', email: 'jimi@xyz.com' },
+      { firstName: 'Paul', lastName: 'Adam', email: 'paul.a@xyz.com' },
+      { firstName: 'Peter', lastName: 'England', email: 'peter@xyz.com' },
+      { firstName: 'Rechard', lastName: 'Jeff', email: 'reachardjeff@xyz.com' }
+        ];
+        
+    }
+</script>  
+</head>  
+<body ng-app>  
+<div  ng-controller="appController">  
+<ul class="example-animate-container">  
+    <li class="animate-repeat" ng-repeat="student in students">  
+      {{$index + 1}}. First Name <strong>{{student.firstName}} </strong>  
+      Last Name <strong>{{student.lastName}}</strong> Email <strong>{{student.email}} </strong>.  
+    </li>  
+    <li class="animate-repeat" ng-if="results.length == 0">  
+      <strong>No results found...</strong>  
+    </li>  
+  </ul>  
+</div>  
+  
+</body>  
+</html>  

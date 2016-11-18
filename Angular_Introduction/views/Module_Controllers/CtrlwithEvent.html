@@ -1,0 +1,29 @@
+﻿<html ng-app>
+<head>
+    <title>AngularJS Controller with Event</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js">  
+    </script>
+    <script type="text/javascript">
+        //Creating AngularJS controller here  
+        function validateForm($scope) {
+            $scope.show = function () {
+                if ($scope.firstName == undefined || $scope.firstName == '')
+                    alert('Name is Required');
+                else
+                    alert('Hi - ' + $scope.firstName);
+            };
+        }
+    </script>
+</head>
+<body>
+    <div ng-controller="validateForm">
+        <form name="newForm">
+            Enter Name:
+            <input type="text" id="firstName" name="firstName"
+                ng-model="firstName" ng-maxlength="20">
+            <br />
+            <button ng-click="show()">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

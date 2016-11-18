@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Angular Boot Strap process</title>
+    <link type="text/css" rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css" />
+    <style>
+        .jumbotron {
+            background-color: #bbdefb;
+            color: inherit;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            padding-top: 30px;
+        }
+        .badge {
+            background-color:#42a5f5;
+            color:#fff
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="jumbotron">AngularJS <span style="color: #2AA332;">Bootstrap Process</span></h1>
+        <hr />
+        <p>AngularJS Bootstrap Process includes from AngularJS initialization to compilation process. AngularJS initialization can be done in two ways, automatic initialization and manual initialization. </p>
+        <p></p>
+        <h3>Automatic Initialization</h3>
+        <p>In automatic initialization, AngularJS initializes automatically upon DOMContentLoaded event or when the angular.js script is read if at that time document.readyState is set to 'complete'. At this point Angular looks for the ng-app directive which is root of the AngularJS compilation process. If the ngApp directive is found then Angular will: </p>
+        <ul>
+            <li>Load the module associated with the directive.</li>
+            <li>Create the application injector</li>
+            <li>Start compilation of DOM from ng-app directive, the root of the compilation.
+</li>
+        </ul>
+        <p><b><a href="Automatic Initialization.html" class="badge">Example</a></b></p>
+        <hr />
+        <h3>Manual Initialization</h3>
+        <p>
+            Sometimes you may need to manual Initialize AngularJS in order to have more control over the initialization precess. You can do that by calling <code>angular.bootstrap()</code> function inside angular.element(document).ready() function. 
+        </p>
+        <p>
+            The <code>angular.bootstrap()</code> function takes two parameters, the document and module name injector as the second parameter to the angular.bootstrap function.
+        </p>
+             <br />
+        <p><b><a href="Manual Initialization.html" class="badge">Example</a></b></p>
+   
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Manual Initialization Using Bootstrap</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
+    <script>
+        var app = angular.module('manualInitialization', [])
+        app.controller('manualInitController', ['$scope', function ($scope) {
+            $scope.url = "www.google.com"
+        }]);
+        angular.element(document).ready(function () {
+            angular.bootstrap(document, ['manualInitialization']);
+        });
+    </script>
+</head>
+<body style="background-color: #bbdefb;">
+    <fieldset style="background-color: #e3f2fd;">
+        <legend><b>AngulerJS Manual Initialization Using Bootstrap Example</b></legend>
+        <div ng-controller="manualInitController">
+            <p style="font-family: Arial; color: white; background: #42a5f5; padding: 3px; width: 350px;">{{url}}</p>
+        </div>
+    </fieldset>
+</body>
+</html>

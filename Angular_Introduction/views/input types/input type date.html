@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- www.techstrikers.com -->
+    <title>Date Test Sample</title>
+    <style>
+        .setBorder {
+            border: 1px solid steelblue;
+            border-collapse: collapse;
+           
+            font: 13px georgia;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+           
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <!--<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap.js"></script>
+    <script>
+        var app = angular.module('dateInputExample', [])
+        app.run(function ($rootScope) {
+            $rootScope.angular = angular;
+        })
+        app.controller('DateController', ['$scope', function ($scope) {
+            $scope.example = {
+                value: new Date(2015, 10, 10),
+                minDate: new Date(2016, 10, 01),
+                maxDate: new Date(2016, 10, 30)
+            };
+            $scope.Compare = function (DateA, DateB) {
+                var a = new Date(DateA);
+                var b = new Date(DateB);
+                var msDateA = Date.UTC(a.getFullYear(), a.getMonth() - 1, a.getDate());
+                var msDateB = Date.UTC(b.getFullYear(), b.getMonth() - 1, b.getDate());
+
+                if (parseFloat(msDateA) < parseFloat(msDateB)) {
+                    return -1;  // less than
+                }
+                else if (parseFloat(msDateA) == parseFloat(msDateB))
+                    return 0;  // equal
+                else if (parseFloat(msDateA) > parseFloat(msDateB))
+                    return 1;  // greater than
+                else
+                    return null;  // error
+            };
+            $scope.getDate = function (dateA) {
+                var dt = dateA.getFullYear() + "-" + (dateA.getMonth()) + "-" + (((dateA.getDate()).toString().length == 1) ? "0" + dateA.getDate() : dateA.getDate());
+                return dt;
+            };
+            $scope.greaterDate = function () {
+                var dateA = new Date($scope.example.maxDate);
+                var dt = dateA.getFullYear() + "-" + (dateA.getMonth()) + "-" + (((dateA.getDate()).toString().length == 1) ? "0" + dateA.getDate() : dateA.getDate());
+                return ($scope.Compare($scope.example.value, dt) == 1) ? true : false;
+            };
+            $scope.lesserDate = function () {
+                var dateA = new Date($scope.example.minDate);
+                var dt = dateA.getFullYear() + "-" + (dateA.getMonth()) + "-" + (((dateA.getDate()).toString().length == 1) ? "0" + dateA.getDate() : dateA.getDate());
+                return ($scope.Compare($scope.example.value, dt) == -1) ? true : false;
+            };
+
+        }]);
+    </script>
+</head>
+<body style="background-color: #bbdefb;">
+    <div class="container">
+        <h1>AngularJS <span style="color: #2AA332">Input Type Date</span></h1>
+        <p>
+            The AngularJS input types are HTML input element control and used togather with <code>ng-model</code> directive. AngularJS input type Date can be decorate with various AngularJS arguments like name, name,ng-min,ng-max,required,ng-required and ng-change. 
+            <br>
+            <b>Note:</b> Many modern browsers do not yet support this input type.
+        </p>
+        <p><b>AngularJS Input Type Date Syntax</b></p>
+        <hr />
+        <h3>AngularJS Input Type Date Arguments</h3>
+        <p>Here is a list of AngularJS Input Type Date Arguments.</p>
+        <table width="99%" cellspacing="0" cellpadding="5" border="0" class="setBorder">
+            <tbody>
+                <tr style="background: #42a5f5;color:white">
+                    <th width="30%" class="setBorder"><b>Directives</b></th>
+                    <th width="70%" class="setBorder"><b>Description</b></th>
+                </tr>
+                <tr>
+                    <td class="setBorder">ng-model</td>
+                    <td class="setBorder">AngularJS expression to bind the data.</td>
+                </tr>
+                <tr>
+                    <td class="setBorder">name (optional)</td>
+                    <td class="setBorder">Name of the control input control.</td>
+                </tr>
+                <tr>
+                    <td class="setBorder">min (optional)</td>
+                    <td class="setBorder">The valid date string (yyyy-MM-dd). This is used to set minimum date validation.</td>
+                </tr>
+                <tr>
+                    <td class="setBorder">max (optional)</td>
+                    <td class="setBorder">The valid date string (yyyy-MM-dd). This is used to set maximun date validation.</td>
+                </tr>
+                <tr>
+                    <td class="setBorder">ng-min (optional)</td>
+                    <td class="setBorder">AngularJS expression sets the min validation constraint to the Date .</td>
+                </tr>
+                <tr>
+                    <td class="setBorder">ng-max (optional)</td>
+                    <td class="setBorder">AngularJS expression sets the max validation constraint to the Date .</td>
+                </tr>
+                <tr>
+                    <td class="setBorder">required (optional)</td>
+                    <td class="setBorder">Validate input type date is required.</td>
+                </tr>
+                <tr>
+                    <td class="setBorder">ng-required (optional)</td>
+                    <td class="setBorder">AngularJS expression ngRequired expression evaluates to true.</td>
+                </tr>
+                <tr>
+                    <td class="setBorder">ng-change (optional)</td>
+                    <td class="setBorder">AngularJS expression to be executed when input value changes.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <fieldset style="background-color: #e3f2fd;">
+            <h2>AngularJS Input Type Date Example</h2>
+            <div ng-app="dateInputExample">
+                <form name="myForm" ng-controller="DateController">
+                    <label for="exampleInput">Select a Date</label>
+                    <input type="date" id="exampleInput" name="input" ng-model="example.value"
+                        placeholder="yyyy-MM-dd" required />
+                    <p style="font-family: Arial; color: red; background: steelblue; padding: 3px; width: 350px;" ng-if='!myForm.input.$valid'>Select valid date</p>
+                    <p style="font-family: Arial; color: #ffffff; background: blue; padding: 3px; width: 350px;" ng-if='!!myForm.$error.required'>Date is required</p>
+
+                    <p style="font-family: Arial; color: white; background: #42a5f5; padding: 3px; width: 350px;" ng-if='greaterDate()'>Date should be less than {{getDate(example.maxDate)}}</p>
+
+                    <p style="font-family: Arial; color: white; background: #42a5f5; padding: 3px; width: 350px;" ng-if='lesserDate()'>Date should be greater than {{getDate(example.minDate)}}</p>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+</body>
+</html>

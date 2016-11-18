@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Angular Custom Directives</title>
+    <link type="text/css" rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css" />
+    <style>
+        .jumbotron {
+            background-color: #bbdefb;
+            color: inherit;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            padding-top: 30px;
+        }
+
+        .badge {
+            background-color: #42a5f5;
+            color: #fff;
+        }
+
+        .prettyprinted {
+            background-color: #e3f2fd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>AngularJS <span style="color: #2AA332;">Custom Directives</span></h1>
+        </div>
+        <hr />
+        <p>AngularJS custom directives used as attribute to control the rendering of the HTML inside an AngularJS application. </p>
+        <p>All built in directives are prefixed with the <code>ng</code> namespace.</p>
+        <p>AngularJS allow you to implement your own custom namespace for directives. </p>
+        <p>AngularJS application during bootstrap finds the matching elements and do one time activity using its compile() method of the custom directive then process the element using link() method of the custom directive based on the scope of the directive.</p>
+        <p>AngularJS provides support to create custom directives for following type of elements.</p>
+        <ul>
+            <li>Element directives - Activated when matching HTML element attribute found.</li>
+            <li>Attribute directives - Activated when matching HTML element in the HTML template found.</li>
+            <li>CSS class directives - Activated when matching CSS Class found.</li>
+            <li>Comment directives - Activated when matching HTML comment found.</li>
+        </ul>
+        <p>
+            In order to create custome directive, you need to give directive definition and register it by giving a name as a string and function name in module.
+            Custom directive name should be pascal style like <code>myDirective</code> and function should always be return object data.
+        </p>
+
+        <p class="text-info"><b>Syntax</b></p>
+        <div style="font-family: Georgia; padding: 10px; width: 500px; border: groove 2px;" class="text-success">
+            <p>angular.module (' yourApp',  [] ) . directive ('myDirective',  function()  {   </p>
+
+            <p>return  {  </p>
+            <p>restrict: 'E',  </p>
+            <p>template:  '&lt a &nbsp; href="http://www.google.com" &gt click here &lt/a &gt'  </p>
+            <p>} }); </p>
+
+        </div>
+        <h3>Understanding Custom Directive</h3>
+        <p>Define custom html tags.</p>
+        <pre class="prettyprint notranslate prettyprinted"><span class="tag">&lt;student</span><span class="pln"> </span><span class="atn">name</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="atv">"Mahesh"</span><span class="tag">&gt;&lt;/student&gt;&lt;br/&gt;</span><span class="pln">
+</span><span class="tag">&lt;student</span><span class="pln"> </span><span class="atn">name</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="atv">"Piyush"</span><span class="tag">&gt;&lt;/student&gt;</span></pre>
+        <p>Define custom directive to handle above custom html tags.</p>
+        <pre class="prettyprint notranslate prettyprinted"><span class="kwd">var</span><span class="pln"> mainApp </span><span class="pun">=</span><span class="pln"> angular</span><span class="pun">.</span><span class="kwd">module</span><span class="pun">(</span><span class="str">"mainApp"</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[]);</span><span class="pln">
+
+</span><span class="com">//Create a directive, first parameter is the html element to be attached.	  </span><span class="pln">
+</span><span class="com">//We are attaching student html tag. </span><span class="pln">
+</span><span class="com">//This directive will be activated as soon as any student element is encountered in html</span><span class="pln">
+
+mainApp</span><span class="pun">.</span><span class="pln">directive</span><span class="pun">(</span><span class="str">'student'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+   </span><span class="com">//define the directive object</span><span class="pln">
+   </span><span class="kwd">var</span><span class="pln"> directive </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{};</span><span class="pln">
+   
+   </span><span class="com">//restrict = E, signifies that directive is Element directive</span><span class="pln">
+   directive</span><span class="pun">.</span><span class="pln">restrict </span><span class="pun">=</span><span class="pln"> </span><span class="str">'E'</span><span class="pun">;</span><span class="pln">
+   
+   </span><span class="com">//template replaces the complete element with its text. </span><span class="pln">
+   directive</span><span class="pun">.</span><span class="kwd">template</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Student: &lt;b&gt;{{student.name}}&lt;/b&gt; , Roll No: &lt;b&gt;{{student.rollno}}&lt;/b&gt;"</span><span class="pun">;</span><span class="pln">
+   
+   </span><span class="com">//scope is used to distinguish each student element based on criteria.</span><span class="pln">
+   directive</span><span class="pun">.</span><span class="pln">scope </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      student </span><span class="pun">:</span><span class="pln"> </span><span class="str">"=name"</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   
+   </span><span class="com">//compile is called during application initialization. AngularJS calls it once when html page is loaded.</span><span class="pln">
+	
+   directive</span><span class="pun">.</span><span class="pln">compile </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">element</span><span class="pun">,</span><span class="pln"> attributes</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      element</span><span class="pun">.</span><span class="pln">css</span><span class="pun">(</span><span class="str">"border"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"1px solid #cccccc"</span><span class="pun">);</span><span class="pln">
+      
+      </span><span class="com">//linkFunction is linked with each element with scope to get the element specific data.</span><span class="pln">
+      </span><span class="kwd">var</span><span class="pln"> linkFunction </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">$scope</span><span class="pun">,</span><span class="pln"> element</span><span class="pun">,</span><span class="pln"> attributes</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+         element</span><span class="pun">.</span><span class="pln">html</span><span class="pun">(</span><span class="str">"Student: &lt;b&gt;"</span><span class="pun">+</span><span class="pln">$scope</span><span class="pun">.</span><span class="pln">student</span><span class="pun">.</span><span class="pln">name </span><span class="pun">+</span><span class="str">"&lt;/b&gt; , Roll No: &lt;b&gt;"</span><span class="pun">+</span><span class="pln">$scope</span><span class="pun">.</span><span class="pln">student</span><span class="pun">.</span><span class="pln">rollno</span><span class="pun">+</span><span class="str">"&lt;/b&gt;&lt;br/&gt;"</span><span class="pun">);</span><span class="pln">
+         element</span><span class="pun">.</span><span class="pln">css</span><span class="pun">(</span><span class="str">"background-color"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"#ff00ff"</span><span class="pun">);</span><span class="pln">
+      </span><span class="pun">}</span><span class="pln">
+      </span><span class="kwd">return</span><span class="pln"> linkFunction</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">}</span><span class="pln">
+   </span><span class="kwd">return</span><span class="pln"> directive</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">});</span></pre>
+        <p>Define controller to update the scope for directive. Here we are using name attribute's value as scope's child.</p>
+        <pre class="prettyprint notranslate prettyprinted"><span class="pln">mainApp</span><span class="pun">.</span><span class="pln">controller</span><span class="pun">(</span><span class="str">'StudentController'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">$scope</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+   $scope</span><span class="pun">.</span><span class="typ">Mahesh</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{};</span><span class="pln">
+   $scope</span><span class="pun">.</span><span class="typ">Mahesh</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Mahesh Parashar"</span><span class="pun">;</span><span class="pln">
+   $scope</span><span class="pun">.</span><span class="typ">Mahesh</span><span class="pun">.</span><span class="pln">rollno  </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln">
+   
+   $scope</span><span class="pun">.</span><span class="typ">Piyush</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{};</span><span class="pln">
+   $scope</span><span class="pun">.</span><span class="typ">Piyush</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Piyush Parashar"</span><span class="pun">;</span><span class="pln">
+   $scope</span><span class="pun">.</span><span class="typ">Piyush</span><span class="pun">.</span><span class="pln">rollno  </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">});</span></pre>
+
+        <p><b><a href="CustomDirectiveEx.html" class="badge">Example</a></b></p>
+    </div>
+</body>
+</html>

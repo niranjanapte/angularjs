@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Angular Module & Controller</title>
+    <link type="text/css" rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css" />
+    <style>
+        .jumbotron {
+            background-color: #bbdefb;
+            color: inherit;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            padding-top: 30px;
+        }
+
+        .badge {
+            background-color: #42a5f5;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="container">
+    <div class="jumbotron">
+        <h1>AngularJS <span style="color: #2AA332;">Modules</span></h1>
+    </div>
+    <div class="row">
+        <p>AngularJS supports modular approach</p>
+        <p>AngularJS module defines an application.</p>
+        <ul>
+            <li>
+                <p><b>Application Module</b> − used to initialize an application with controller(s).</p>
+            </li>
+            <li>
+                <p><b>Controller Module</b> − used to define the controller.</p>
+            </li>
+        </ul>
+        <p>
+            AngularJS modules are container for the different parts of your application such as controllers, services, filters, directives, etc.
+        </p>
+
+        <p>
+            AngularJS modules define application and its logical entities that helps you to divide your application. 
+So you can keep several modules inside app. AngularJS allow you to declare a module using the <code>angular.module()</code> method.   
+        </p>
+        A module can contain one or more controllers, services, filters and directives. Similarly an app can contains several modules.
+       <br />
+        <h4>Syntax</h4>
+        <i class="alert-info"><b>Application Module</b></i>
+        <div style="padding: 5px; width: 320px; border: groove 2px;" class="text-success">
+            <p>var app = angular.module('yourApp', []); </p>
+        </div>
+
+        <hr />
+        <h1>AngularJS <span style="color: #2AA332;">Controller</span></h1>
+        <h4 style="padding-left: 20px; font-style: oblique" class="text-success">A Controller Module</h4>
+        <br />
+        <p>AngularJS application mainly relies on controllers to control the flow of data in the application. </p>
+        <p>A controller is defined using <code>ng-controller</code> directive. A controller is a JavaScript object containing attributes/properties and functions.</p>
+        <p>Each controller accepts <code>$scope</code> as a parameter which refers to the application/module that controller is to control.</p>
+        <p><b>AngularJS controller used to:</b></p>
+        <ul>
+            <li>To intialized state of the $scope object.</li>
+            <li>To add behavior to the $scope object.</li>
+        </ul>
+        <h4 class="text-danger">Different ways to define controller in AngularJS</h4>
+        <p class="text-info"><b>Syntax 1 - Define Controller</b></p>
+        <div style="padding: 10px; width: 320px; border: groove 2px;" class="text-success">
+            <p>function CustomerController($scope) {  </p>
+            <p>$scope.customer = { name: "Jimi Scott" };  </p>
+            <p>}  </p>
+        </div>
+        <br />
+        <p><b><a href="CtrlwithoutModule.html" class="badge">Example</a></b></p>
+        <hr />
+        <p class="text-info"><b>Syntax 2 - Define Controller with Module</b></p>
+        <div style="padding: 10px; width: 320px; border: groove 2px;" class="text-success">
+            <p>var app = angular.module('yourApp', []);</p>
+            <p>app.controller('yourController', function($scope) {});  </p>
+        </div>
+
+        <br />
+        <p><b><a href="CtrlwithModule.html" class="badge">Example</a></b></p>
+        <hr />
+        <h3>Syntax 3 - AngularJS Controller with (Event)</h3>
+        <div style="padding: 20px; width: 500px; border: groove 2px;" class="text-success">
+
+            <span><span>&lt;button&nbsp;id=</span><span class="string">"btnSubmit"</span><span>&nbsp;ng-click=</span><span class="string">"onBtnClick()"</span><span>&gt;Click&nbsp;Here&lt;/button&gt;&nbsp;&nbsp;</span></span>
+
+        </div>
+        <p>
+            AngularJS allows to add event handler method in controler and call these method from view. You just need to call the method as per requirement on the controller.
+        </p>
+        <br />
+        <p><b><a href="CtrlwithEvent.html" class="badge">Example</a></b></p>
+    </div>
+</body>
+</html>

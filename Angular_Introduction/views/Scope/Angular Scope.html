@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>AngularJS Scopes</title>
+    <link type="text/css" rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style>
+        .jumbotron {
+            background-color: #bbdefb;
+            color: inherit;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            padding-top: 30px;
+        }
+
+        .badge {
+            background-color: #42a5f5;
+            color: #fff;
+        }
+
+        .prettyprinted {
+            background-color: #e3f2fd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>AngularJS <span style="color: #2AA332">Scopes</span></h1>
+        </div>
+        <p>
+            Scope is a special type of object in AngularJS and it acts like a bridge between controller and view. It can hold any type of javascript type including object.  
+        </p>
+        <p>In AngularJS, scopes are arranged in hierarchical structure which mimic the DOM structure.  </p>
+        <p>The scope object are declare as data model in controller to hold the properties and accessible to the view.  </p>
+        <p>In controllers, model data is accessed via $scope object.</p>
+        <br />
+        <pre class="prettyprint notranslate prettyprinted"><span class="tag">&lt;script&gt;</span><span class="pln">
+   </span><span class="kwd">var</span><span class="pln"> mainApp </span><span class="pun">=</span><span class="pln"> angular</span><span class="pun">.</span><span class="pln">module</span><span class="pun">(</span><span class="str">"mainApp"</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[]);</span><span class="pln">
+   
+   mainApp</span><span class="pun">.</span><span class="pln">controller</span><span class="pun">(</span><span class="str">"shapeController"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">$scope</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      $scope</span><span class="pun">.</span><span class="pln">message </span><span class="pun">=</span><span class="pln"> </span><span class="str">"In shape controller"</span><span class="pun">;</span><span class="pln">
+      $scope</span><span class="pun">.</span><span class="pln">type </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Shape"</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">});</span><span class="pln">
+</span><span class="tag">&lt;/script&gt;</span></pre>
+        <label class="control-label">Following are the important points to be considered in above example.</label>
+        <ul class="fa-ul">
+            <li>
+                <i class="fa-li fa fa-check-square"></i>
+                <p>$scope is passed as first argument to controller during its constructor definition.</p>
+            </li>
+            <li>
+                <i class="fa-li fa fa-check-square"></i>
+                <p>$scope.message and $scope.type are the models which are to be used in the HTML page.</p>
+            </li>
+            <li>
+                <i class="fa-li fa fa-check-square"></i>
+                <p>We've set values to models which will be reflected in the application module whose controller is shapeController.</p>
+            </li>
+            <li>
+                <i class="fa-li fa fa-check-square"></i>
+                <p>We can define functions as well in $scope.</p>
+            </li>
+        </ul>
+
+        <h3>Scope Inheritance</h3>
+        <p>Scope are controllers specific. If we define nested controllers then child controller will inherit the scope of its parent controller.</p>
+        <pre class="prettyprint notranslate prettyprinted"><span class="tag">&lt;script&gt;</span><span class="pln">
+   </span><span class="kwd">var</span><span class="pln"> mainApp </span><span class="pun">=</span><span class="pln"> angular</span><span class="pun">.</span><span class="pln">module</span><span class="pun">(</span><span class="str">"mainApp"</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[]);</span><span class="pln">
+   
+   mainApp</span><span class="pun">.</span><span class="pln">controller</span><span class="pun">(</span><span class="str">"shapeController"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">$scope</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      $scope</span><span class="pun">.</span><span class="pln">message </span><span class="pun">=</span><span class="pln"> </span><span class="str">"In shape controller"</span><span class="pun">;</span><span class="pln">
+      $scope</span><span class="pun">.</span><span class="pln">type </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Shape"</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">});</span><span class="pln">
+   
+   mainApp</span><span class="pun">.</span><span class="pln">controller</span><span class="pun">(</span><span class="str">"circleController"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">$scope</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      $scope</span><span class="pun">.</span><span class="pln">message </span><span class="pun">=</span><span class="pln"> </span><span class="str">"In circle controller"</span><span class="pun">;</span><span class="pln">
+   </span><span class="pun">});</span><span class="pln">
+	
+</span><span class="tag">&lt;/script&gt;</span></pre>
+        <label class="control-label">Following are the important points to be considered in above example.</label>
+        <ul class="fa-ul">
+            <li>
+                <i class="fa-li fa fa-check-square"></i>
+                <p>We've set values to models in shapeController.</p>
+            </li>
+            <li>
+                <i class="fa-li fa fa-check-square"></i>
+                <p>We've overridden message in child controller circleController. When "message" is used within module of controller circleController, the overridden message will be used.</p>
+            </li>
+        </ul>
+        <br />
+        <p><b><a href="Scope Inheritance.html" class="badge" target="_blank">Example</a></b></p>
+        <hr />
+        <h3>Root Scope</h3>
+        <p>
+            All applications have a <code class="w3-codespan">$rootScope</code> which is the scope created on the HTML element that contains the <code class="w3-codespan">ng-app</code> directive.
+        </p>
+        <p>
+            If a variable has the same name in both the current scope and in the rootScope, the application use the one in the current scope.
+        </p>
+         <p><b><a href="RootScope.html" class="badge" target="_blank">Example</a></b></p>
+    </div>
+</body>
+</html>

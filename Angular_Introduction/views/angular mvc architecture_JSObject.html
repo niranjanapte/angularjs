@@ -1,0 +1,31 @@
+<html ng-app>  
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
+<link type="text/css" rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css"/>  
+<title>My first AngularJS MVC Pattern code</title>
+  <!-- www.techstrikers.com -->
+<script SRC="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js">  
+  
+</script>  
+<script type="text/javascript">
+    //Creating controller here  
+    function RealCustomer($scope) {
+        //Creating model here  
+        $scope.customer = {
+            'Name': 'Jimi',
+            'Address': '12-13-283/A1',
+            'Email': 'jimi@yahoo.com'
+        }
+    }
+</script>  
+</head>  
+<body class="container">  
+<p>Displing model data in view through controller</p>  
+<div ng-controller="RealCustomer">  
+<h3>{{ customer.Name }} </h3>  
+<h3>{{ customer.Address }} </h3>  
+<h3>{{ customer.Email }} </h3>  
+</div>  
+</body>  
+</html>
