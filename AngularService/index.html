@@ -1,0 +1,23 @@
+<html>  
+<head>  
+<title>Angular Service</title>  
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js">  
+</script>  
+<script src="script.js">  
+
+</script>  
+</head>  
+<body>  
+  
+<div ng-app="app">  
+    <div ng-controller="CalculatorController">  
+        Enter a number:  
+        <input ng-model="number" type="number">  
+      <button ng-click="doSquare()"><b>X<sup>2</sup></b></button>  
+      <button ng-click="doCube()"><b>X<sup>3</sup></b></button>  
+           
+        <div>Answer: {{answer}}</div>  
+    </div>  
+</div>  
+</body>
+</html>
