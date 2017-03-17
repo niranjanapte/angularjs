@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ENG">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Conditional Rendering</title>
+		<link data-require="bootstrap@3.3.7" data-semver="3.3.7" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script data-require="angular.js@1.6.2" data-semver="1.6.2" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.js"></script>
+		
+		<script type="text/javascript" src="js/script.js"></script>
+	</head>
+	<body class="container" ng-app="myapp">
+		<h2>Filtering</h2>
+		<p>
+			Some of the directives covered above support filtering. This section will explain how filtering works.
+		</p>
+		<p>
+			The <code>ng-repeat</code> directive can accept a filter like this:
+		</p>
+		<pre class="codeBox">
+			&lt;div ng-repeat="item in myData.items | filter: itemFilter(item)"&gt;&lt;/div&gt;
+		</pre>
+		<p>
+			Notice the <code>| filter: itemFilter</code> part of the declaration above. That part is the
+			filter definition. The <code>| filter:</code> part tells AngularJS to apply a filter to the
+			<code>myData.items</code> array. The <code>itemFilter</code> is the name of the filter function.
+			This function has to be present on the <code>$scope</code> object, and it has to return either
+			true or false. If the filter function returns true, then the element from the array is used by
+			the <code>ng-repeat</code> directive. If the filter function returns false, the element is ignored.
+			Here is an example:
+		</p>
+		<h4 class="text-primary">Example</h4>
+		<div ng-controller="MyController" class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+			<div ng-repeat="item in myData.items | filter: itemFilter"></div>
+		</div>
+		<br>
+		<pre class="codeBox">
+			&lt;script&gt;
+			  angular.module("myapp", [])
+			    .controller("MyController", function($scope) {
+			      $scope.myData = {};
+			      $scope.myData.items  = [ {text : "one"}, {text : "two"}, {text : "three"}, {text : "four"} ];
+			      $scope.itemFilter = function(item) {
+			        if(item.text == "two") return false;
+			       else   return true;
+			        
+			      }
+			    });
+			&lt;/script&gt;
+		</pre>
+		<h3>Formatting Filters</h3>
+		<p>
+			AngularJS comes with a set of built-in formatting filters which can be used in conjunction with the interpolation
+			directive, and with <code>ng-bind</code>.  Here is a list of the formatting filters:
+		</p>
+		<table class="dataTable">
+			<tr>
+				<th>Filter</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td><code>date</code></td>
+				<td>Formats the variable as a date according to the given date format</td>
+			</tr>
+			<tr>
+				<td><code>currency</code></td>
+				<td>Formats the variable as a number with a currency symbol</td>
+			</tr>
+			<tr>
+				<td><code>number</code></td>
+				<td>Formats the variable as a number</td>
+			</tr>
+			<tr>
+				<td><code>lowercase</code></td>
+				<td>Converts the variable to lowercase</td>
+			</tr>
+			<tr>
+				<td><code>uppercase</code></td>
+				<td>Converts the variable to uppercase</td>
+			</tr>
+			<tr>
+				<td><code>json</code></td>
+				<td>Converts the variable to a JSON string</td>
+			</tr>
+		</table>
+		<p>
+			Here is a date filter example:
+		</p>
+		<pre class="codeBox">
+			&lt;span&gt;{{myData.theDate | date: 'dd-MM-yyyy'}}&lt;/span&gt;
+		</pre>
+		<p>
+			This example shows the <code>date</code> filter which can format a JavaScript date object according
+			to the date format pattern given after the <code>| date: </code> part. It is the <code>myData.theDate</code>
+			property that will be formatted as a date. Thus, it has to be a JavaScript date object.
+		</p>
+		<h4 class="text-primary">Example</h4>
+		<div ng-controller="MyController" class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+			{{myData.theDate | date: 'dd-MM-yyyy'}}
+		</div>
+		<br>
+		<p>
+			Here is a number filter example:
+		</p>
+		<pre class="codeBox">
+			&lt;span&gt;{{myData.theNumber | number: 2}}&lt;/span&gt;
+		</pre>
+		<p>
+			This example formats the <code>myData.theNumber</code> variable as a number with 2 decimal places.
+		</p>
+		<p>
+			Here are an lowercase and uppercase filter example:
+		</p>
+		<pre class="codeBox">
+			&lt;span&gt;{{myData.mixedCaseText | lowercase}}&lt;/span&gt;
+			&lt;span&gt;{{myData.mixedCaseText | uppercase}}&lt;/span&gt;
+		</pre>
+		<a name="array-filters"></a>
+		<h3>Array Filters</h3>
+		<p>
+			AngularJS also contains a set of array filters which filters or transforms arrays. These
+			filters are:
+		</p>
+		<p>
+			Array Filters:
+		</p>
+		<table class="dataTable">
+			<tr><th>Filter</th>
+			<th>Description</th>
+		</tr>
+		<tr><td><code>limitTo</code></td>
+		<td>Limits the array to the given size, beginning from some index in the array.
+			The <code>limitTo</code> filter also works on strings.
+		</td>
+	</tr>
+	<tr><td><code>filter</code></td>
+	<td>A general purpose filter.</td>
+</tr>
+<tr><td><code>orderBy</code></td>
+<td>Sorts the array based on provided criteria.</td>
+</tr>
+</table>
+<p>
+Here is a <code>limitTo</code> example:
+</p>
+<pre class="codeBox">
+&lt;span&gt;{{myData.theText | limitTo: 3}}&lt;/span&gt;
+</pre>
+<p>
+This limits the <code>$scope</code> <code>myData.theText</code> variable to a length of 3 characters.
+If this filter had been applied to an array, the array would have been limited to 3 elements.
+</p>
+<p>
+The <code>filter</code> filter is a special filter which can do a lot of different things.
+In its simplest form it simply calls a function on the <code>$scope</code> object. This
+function must return <code>true</code> or <code>false</code>. True is returned if the filter
+accepts the value passed to it. False is returned if the filter cannot accept the value.
+If the filter cannot accept the value, the value is not included in the array resulting
+from the filtering. Here is an example:
+</p>
+<pre class="codeBox">
+&lt;ol&gt;
+    &lt;li ng-repeat="item in myData.items | filter:filterArray"&gt;
+        {{item.text}} : {{$first}}, {{$middle}}, {{$last}}
+    &lt;/li&gt;
+&lt;/ol&gt;
+&lt;script&gt;
+    angular.module("myapp", [])
+        .controller("MyController", function($scope) {
+            $scope.myData = {};
+            $scope.myData.items    = 
+                [ {text : "one"}, {text : "two"}, {text : "three"}, {text : "four"} ];
+            $scope.filterArray = function(item) {
+                if(item.text == "two") return false;
+                return true;
+            }
+        } );
+&lt;/script&gt;
+</pre>
+<p>
+This example calls the <code>filterArray()</code> function which filters out items which has a
+<code>text</code> property with the value <code>two</code>.
+</p>
+<p>
+Here is an <code>orderBy</code> example:
+</p>
+<pre class="codeBox">
+&lt;ol&gt;
+    &lt;li ng-repeat="item in myData.items | orderBy:sortField:reverse"&gt;
+        {{item.text}} : {{$first}}, {{$middle}}, {{$last}}
+    &lt;/li&gt;
+&lt;/ol&gt;
+    
+&lt;script&gt;
+    angular.module("myapp", [])
+            .controller("MyController", function($scope) {
+                $scope.myData = {};
+                $scope.myData.items    = [ {text : "one"}, {text : "two"}, {text : "three"}, {text : "four"} ];
+                $scope.sortField = "text";
+                $scope.reverse   = true;
+            } );
+&lt;/script&gt;
+</pre>
+<p>
+The <code>orderBy</code> filter takes a <code>$scope</code> variable as parameter. In this example
+that variable is named <code>sortField</code>. The value of this variable is the name of the property
+on the sorted data objects which is used to sort the data objects. In this example the <code>sortField</code>
+property is set to <code>text</code> which means that the data object's <code>text</code> property is used
+to sort the data objects.
+</p>
+<p>
+The <code>orderBy</code> filter can also take a second <code>$scope</code> variable as parameter.
+In this example that variable is named <code>reverse</code>. The value of this variable determines
+if the data objects are to be sorted in their natural order, or the reverse order of that. In this
+case the <code>reverse</code> variable is set to <code>true</code>, meaning the data objects will
+be sorted in reverse order.
+</p>
+<h3>Chaining Filters</h3>
+<p>
+It is possible to chain filters by simply putting more filters after each other in the
+filter section. When chaining filters, the output of one filter is used as input for the next
+filter in the chain. Here is an example:
+</p>
+<pre class="codeBox">
+&lt;span&gt;{{myData.theText | limitTo: 5 | uppercase}}&lt;/span&gt;
+</pre>
+<p>
+This example first limits the string <code>myData.theText</code> to 5 characters using the
+<code>limitTo</code> filter, and the converts the 5 characters to uppercase using the <code>uppercase</code>
+filter.
+</p>
+<a name="assigning-filter-output-to-variables"></a>
+<h3>Assigning Filter Output To Variables</h3>
+<p>
+It is possible to assign the output of a filter to a temporary variable which you can then refer
+to later in your view. Here is an example:
+</p>
+<pre class="codeBox">
+&lt;ol&gt;
+    &lt;li ng-repeat="item in filteredItems = ( myData.items | filter:filterArray) "&gt;
+        {{item.text}} : {{$first}}, {{$middle}}, {{$last}}
+    &lt;/li&gt;
+&lt;/ol&gt;
+&lt;div&gt;{{filteredItems.length}}&lt;/div&gt;
+</pre>
+<p>
+This example assigns the output of the filtering to the <code>filteredItems</code> variable.
+The example then refers to this variable inside the <code>{{ }}</code> directive under
+the <code>ol</code> element.
+</p>
+<h3>Implementing Custom Filters</h3>
+<p>
+You can implement your own filters in case the AngularJS filters do not suit your needs.
+Here is an example:
+</p>
+<pre class="codeBox">
+&lt;div&gt;Filtered: {{myData.text | myFilter}}&lt;/div&gt;
+    
+    
+&lt;script&gt;
+    var module = angular.module("myapp", []);
+    module.filter('myFilter', function() {
+        return function(stringValue) {
+            return stringValue.substring(0,3);
+        };
+    });
+&lt;/script&gt;    
+</pre>
+<p>
+This example registers a filter with AngularJS which can filter strings. The filter returns the first 3
+characters of the string. The filter is registered with the name <code>myFilter</code>. It is this name
+you will have to use when referencing the filter, as you can see in the beginning of the filter.
+</p>
+<p>
+If your filter needs more input parameters, add more parameters to the filter function, and add the
+parameters after the filter name and a <code>:</code> when referencing it. Here is an example:
+</p>
+<pre class="codeBox">
+&lt;div&gt;Filtered: {{myData.text | myFilter<b>:2:5</b>}}&lt;/div&gt;
+&lt;script&gt;
+    var module = angular.module("myapp", []);
+    module.filter('myFilter', function() {
+        return function(stringValue, <b>startIndex</b>, <b>endIndex</b>) {
+            return stringValue.substring(parseInt(startIndex), parseInt(endIndex));
+        };
+    });
+&lt;/script&gt;
+</pre>
+<p>
+Notice how the filter reference (<code>| myfilter:2:5</code>) now has two values
+after the filter name, each value separated by a colon. These two values are passed to the
+filter as parameters. Notice also how the filter function now takes two extra parameters
+named <code>startIndex</code> and <code>endIndex</code>. These two parameters are
+used to determine which part of the string to return as substring from the filter.
+</p>
+<!-- ****************************************************************************************************************************** -->
+<!--Script block-->
+<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script data-require="bootstrap@3.3.7" data-semver="3.3.7" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

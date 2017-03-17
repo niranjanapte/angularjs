@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ENG">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Conditional Rendering</title>
+		<link data-require="bootstrap@3.3.7" data-semver="3.3.7" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script data-require="angular.js@1.6.2" data-semver="1.6.2" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.js"></script>
+		
+		<script type="text/javascript" src="js/script.js"></script>
+	</head>
+	<body class="container" ng-app="myapp">
+		<h2>Conditional Rendering</h2>
+		
+		<p>AngularJS can show or hide HTML depending on the state of data in the model. You do so using a set of AngularJS directives which are created specifically for that purpose.</p>
+		<h2>ng-show + ng-hide Directives</h2>
+		<p>The ng-show and ng-hide directives are used to show or hide an HTML element depending on data in the model. These two directives do the same thing, but are each other's opposites.</p>
+		<h4 class="text-primary">Example</h4>
+		<div ng-controller="MyController" class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+			<span ng-show="myData.showIt">show</span>
+			<span ng-hide="myData.showIt">hide</span>
+		</div>
+		<br>
+		<p>
+			This example creates two <code>span</code> elements. One has an <code>ng-show</code> directive
+			and the other has an <code>ng-hide</code> directive. Both directives look at the <code>myData.showIt</code>
+			boolean variable to determine if they should show or hide the <code>span</code> element. The <code>ng-show</code>
+			directive will show the element if the model value is true, and hide the element if the model value is false.
+			The <code>ng-hide</code> directive will do the opposite: Hide the <code>span</code> element if the model value is
+			true, and show it if the model value is false.
+		</p>
+		<p>
+			Notice how the controller function sets the <code>myData.showIt</code> to <code>true</code>. This means that the
+			example above will show the first span element and hide the second.
+		</p>
+		<p>
+			The HTML elements (<code>span</code> elements in this case) are hidden using the CSS property <code>display: none;</code>.
+			That means, that the HTML elements are still present in the DOM. They are just not visible.
+		</p>
+		<a name="ng-switch-directive"></a>
+		<h2>ng-switch Directive</h2>
+		<p>
+			The <code>ng-switch</code> directive is used if you want to add or remove HTML elements from the DOM based
+			on data in the model. Here is an example:
+		</p>
+		<h4 class="text-primary">Example</h4>
+		<div ng-controller="MyController" >
+			<div ng-switch on="myData.switch" class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+				<div ng-switch-when="1">Shown when switch is 1</div>
+				<div ng-switch-when="2">Shown when switch is 2</div>
+				<div ng-switch-default>Shown when switch is anything else than 1 and 2</div>
+			</div>
+		</div>
+		<br>
+		<pre class="codeBox">&lt;div ng-controller="MyController" &gt;
+			    &lt;div ng-switch on="myData.switch"&gt;
+			        &lt;div ng-switch-when="1"&gt;Shown when switch is 1&lt;/div&gt;
+			        &lt;div ng-switch-when="2"&gt;Shown when switch is 2&lt;/div&gt;
+			        &lt;div ng-switch-default&gt;Shown when switch is anything else than 1 and 2&lt;/div&gt;
+			    &lt;/div&gt;
+			&lt;/div&gt;
+			&lt;script&gt;
+			    angular.module("myapp", [])
+			    .controller("MyController", function($scope) {
+			      $scope.myData = {};
+			      $scope.myData.switch = 3;
+			    });
+			&lt;/script&gt;
+		</pre>
+		<p>
+			This example contains a <code>div</code> element with an <code>ng-switch</code> attribute and
+			an <code>on</code> attribute. The <code>on</code> attribute tells which data in the model to
+			switch on.
+		</p>
+		<p>
+			Inside the <code>div</code> element are three nested <code>div</code> elements. The first
+			two nested <code>div</code> elements contains an <code>ng-switch-when</code> attribute. The
+			value of this attribute tells what value the model data referenced in the <code>on</code> attribute of
+			the parent <code>div</code> should have, for the nested <code>div</code> to be visible. In this
+			example the first nested <code>div</code> is visible when <code>myData.switch</code> is 1, and the
+			second nested <code>div</code> is visible when <code>myData.switch</code> is 2.
+		</p>
+		<p>
+			The <code>third</code> nested <code>div</code> has an <code>ng-switch-default</code> attribute.
+			If no of the other <code>ng-switch-when</code> directives are matched, then the <code>div</code>
+			with the <code>ng-switch-default</code> attribute is shown.
+		</p>
+		<p>
+			In the example above the controller function sets <code>myData.switch</code> to 3. That means
+			that the nested <code>div</code> with the <code>ng-switch-default</code> attribute will be shown.
+			The two other nested <code>div</code> elements will be removed from the DOM completely.
+		</p>
+		<hr>
+		<h2>ng-if Directive</h2>
+		<p>
+			The <code>ng-if</code> directive can include / remove HTML elements from the DOM, just like
+			the <code>ng-switch</code> directive, but it has a simpler syntax. Here is an example:
+		</p>
+		<h4 class="text-primary">Example</h4>
+		<div ng-controller="MyController" >
+			<div ng-switch on="myData.switch" class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+				<div ng-if="myData.showIt">ng-if Show it</div>
+			</div>
+		</div>
+		<br>
+		<pre class="codeBox">
+			&lt;div ng-controller="MyController" &gt;
+			    &lt;div ng-if="myData.showIt"&gt;ng-if Show it&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;script&gt;
+			    angular.module("myapp", [])
+			    .controller("MyController", function($scope) {
+			        $scope.myData = {};
+			        $scope.myData.showIt = true;
+			    });
+			&lt;/script&gt;
+		</pre>
+		<p>
+			The main difference between <code>ng-if</code> and <code>ng-show</code> + <code>ng-hide</code> is that
+			<code>ng-if</code> removes the HTML element completely from the DOM, whereas the <code>ng-show</code> +
+			<code>ng-hide</code> just applies the CSS property <code>display: none;</code> to the elements.
+		</p>
+		<hr>
+		<h2>ng-include Directive</h2>
+		<p>
+			The <code>ng-include</code> directive can be used to include HTML fragments from other files into
+			the view's HTML template. Here is an example:
+		</p>
+		<h4 class="text-primary">Example</h4>
+		<div ng-controller="MyController"  class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+			
+			<div ng-include="'angular-included-fragment.html'"></div>
+			
+		</div>
+		<br>
+		<pre class="codeBox">
+			&lt;div ng-controller="MyController" &gt;
+			    &lt;div ng-include="'angular-included-fragment.html'"&gt;&lt;/div&gt;
+			&lt;/div&gt;
+		</pre>
+		<p>
+			This example includes the file <code>angular-included-fragment.html</code> into the HTML template
+			inside the <code>div</code> having the <code>ng-include</code> attribute. Notice how the file name
+			is quoted (single quotes).
+		</p>
+		<p>
+			You can include HTML fragments based on conditions. For instance, you can choose between two files
+			like this:
+		</p>
+		<h4 class="text-primary">Example</h4>
+		<div ng-controller="MyController"  class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+			
+			<div ng-include="myData.showIt && 'fragment-1.html' ||'fragment-2.html'"></div>
+			
+		</div>
+		<br>
+		<pre class="codeBox">
+			&lt;div ng-controller="MyController" &gt;
+			    &lt;div ng-include="myData.showIt &&
+			                        'fragment-1.html' ||
+			                        'fragment-2.html'"&gt;&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;script&gt;
+			    angular.module("myapp", [])
+			    .controller("MyController", function($scope) {
+			        $scope.myData = {};
+			        $scope.myData.showIt = true;
+			    });
+			&lt;/script&gt;
+		</pre>
+		<p>
+			This example will include <code>fragment-1.html</code> if <code>myData.showIt</code> is true,
+			and <code>fragment-2.html</code> if <code>myData.showIt</code> is false.
+		</p>
+		<h2>ng-repeat Directive</h2>
+		<p>
+			The <code>ng-repeat</code> directive is used to iterate over a collection of items and generate
+			HTML from it. After the initial generation the <code>ng-repeat</code> monitors the items used to generate
+			the HTML for changes. If an item changes, the <code>ng-repeat</code> directive may update the HTML
+			accordingly. This includes reordering and removing DOM nodes.
+		</p>
+		<p>
+			Here is a simple <code>ng-repeat</code> example:
+		</p>
+		<h4 class="text-primary">Example</h4>
+		<div ng-controller="MyController"  class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+			
+			<ol>
+				<li ng-repeat="theItem in myData.items">{{theItem.text}}</li>
+			</ol>
+			
+		</div>
+		<br>
+		<pre class="codeBox">
+			&lt;ol&gt;
+			   &lt;li ng-repeat="theItem in myData.items"&gt;{{theItem.text}}&lt;/li&gt;
+			&lt;/ol&gt;
+			&lt;script&gt;
+			    angular.module("myapp", [])
+			    .controller("MyController", function($scope) {
+			        $scope.myData = {};
+			        $scope.myData.items = [ {text : "one"}, {text : "two"}, {text : "three"} ];
+			    });
+			&lt;/script&gt;
+		</pre>
+		<p>
+			This example will create an <code>li</code> element for each item in the <code>myData.items</code> array.
+		</p>
+		<p>
+			You can also iterate over collections returned from a function call. Here is an example:
+		</p>
+		<h4 class="text-primary">Example</h4>
+		<div ng-controller="MyController"  class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+			
+			<ol>
+				<li ng-repeat="theItem in myData.getItems()">{{theItem.text}}</li>
+			</ol>
+			
+		</div>
+		<br>
+		<pre class="codeBox">
+			&lt;ol&gt;
+			   &lt;li ng-repeat="theItem in myData.getItems()"&gt;{{theItem.text}}&lt;/li&gt;
+			&lt;/ol&gt;
+			&lt;script&gt;
+			    angular.module("myapp", [])
+			    .controller("MyController", function($scope) {
+			        $scope.myData = {};
+			        $scope.myData.items = [ {text : "one"}, {text : "two"}, {text : "three"} ];
+			        $scope.myData.getItems = function() { return this.items; };
+			    });
+			&lt;/script&gt;
+		</pre>
+		<p>
+			And you can iterate over the properties of a JavaScript object using a slightly different syntax:
+		</p>
+		<h4 class="text-primary">Example</h4>
+		<div ng-controller="MyController"  class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+			
+			<ol>
+				<li ng-repeat="(name, value) in myData.myObject">{{name}} = {{value}}</li>
+			</ol>
+			
+		</div>
+		<br>
+		<pre class="codeBox">
+			&lt;ol&gt;
+			   &lt;li ng-repeat="(name, value) in myData.myObject">{{name}} = {{value}}&lt;/li&gt;
+			&lt;/ol&gt;
+			&lt;script&gt;
+			    angular.module("myapp", [])
+			    .controller("MyController", function($scope) {
+			        $scope.myData = {};
+			        $scope.myData.myObject = { var1 : "val1", var2 : "val3", var3 : "val3"};
+			    });
+			&lt;/script&gt;
+		</pre>
+		<p>
+			Notice the <code>(name, value)</code> part of the <code>ng-repeat</code> directive. That
+			signals to AngularJS to iterate over the properties of an object. The <code>name</code>
+			parameter will be bound to the property name, and the <code>value</code> parameter will
+			be bound to the property value. The <code>name</code> and <code>value</code> parameters
+			can be output to the HTML template just like any other JavaScript variable or object property,
+			as you can see from the HTML template above.
+		</p>
+		<h3>Special ng-repeat Variables</h3>
+		<p>
+			The <code>ng-repeat</code> directive defines a set of special variables which you
+			can use when iterating the collection. These variables are:
+		</p>
+		<ul>
+			<li>$index</li>
+			<li>$first</li>
+			<li>$middle</li>
+			<li>$last</li>
+		</ul>
+		<p>
+			The <code>$index</code> variable contains the index of the element being iterated.
+		</p>
+		<p>
+			The <code>$first</code>, <code>$middle</code> and <code>$last</code> contain a boolean
+			value depending on whether the current item is the first, middle or last element
+			in the collection being iterated. An item is "middle" if it is not first nor last. You can use these variables to generate different
+			HTML using e.g. the <code>ng-show</code> / <code>ng-hide</code>, <code>ng-switch</code>,
+			<code>ng-if</code> and <code>ng-include</code> directives described earlier.
+		</p>
+		<h3>Repeating Multiple Elements</h3>
+		<p>
+			So far you have only seen how to repeat a single HTML element using <code>ng-repeat</code>.
+			In case you want to repeat more than one HTML element you would have to nest those elements
+			inside a container element, and have the container element have the <code>ng-repeat</code>
+			element, like this:
+		</p>
+		<div ng-controller="MyController"  class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+			
+			<div ng-repeat="(name, value) in myData.myObject">
+				<li>{{name}}</li>
+				<li>{{value}}</li>
+			</div>
+			
+		</div>
+		<br>
+		<pre class="codeBox">
+			&lt;div ng-repeat="(name, value) in myData.myObject"&gt;
+			   &lt;li&gt;{{name}}&lt;/li&gt;
+			   &lt;li&gt;{{value}}&lt;/li&gt;
+			&lt;/div&gt;
+		</pre>
+		<p>
+			Wrapping the element to be repeated in a root element may not always be possible though. Therefore
+			AngularJS has the <code>ng-repeat-start</code> and <code>ng-repeat-end</code> directives which mark
+			which element to start and end the repetition with. Here is an example:
+		</p>
+		<div ng-controller="MyController"  class="text-muted text-success"><i class="glyphicon glyphicon-arrow-right"></i>
+			
+			<ol>
+				<li ng-repeat-start="(name, value) in myData.myObject">{{name}}</li>
+				<li ng-repeat-end>{{value}}</li>
+			</ol>
+			
+		</div>
+		<br>
+		<pre class="codeBox">
+			&lt;ol&gt;
+			    &lt;li ng-repeat-start="(name, value) in myData.myObject"&gt;{{name}}&lt;/li&gt;
+			    &lt;li ng-repeat-end&gt;{{value}}&lt;/li&gt;
+			&lt;/ol&gt;
+		</pre>
+		<p>
+			This example will repeat both of the <code>li</code> elements for each property in
+			<code>myData.myObject</code>.
+		</p>
+		<!-- ****************************************************************************************************************************** -->
+		<!--Script block-->
+		
+		<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script data-require="bootstrap@3.3.7" data-semver="3.3.7" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</body>
+</html>

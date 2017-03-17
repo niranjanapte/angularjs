@@ -1,0 +1,7 @@
+.codeBox {
+    background-color: #f0f0f0;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    max-width: 100%;
+    overflow: auto;
+}

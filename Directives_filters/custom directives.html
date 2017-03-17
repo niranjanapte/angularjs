@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <link data-require="bootstrap@3.3.7" data-semver="3.3.7" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script data-require="angular.js@1.6.2" data-semver="1.6.2" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="js/script.js"></script>
+    
+  </head>
+  <body class="container" ng-app="myapp">
+    <h2>Interpolation Directive</h2>
+    <p>The interpolation directive is one of the most fundamental directives in AngujarJS. The interpolation directive inserts the result of an expression into the HTML template. You mark where to insert the expression using the {{ }} notation.</p>
+    <br>
+    <h4 class="text-primary">Example</h4>
+    <div ng-controller="MyController" >
+      <label>{{myData.textf()}}</label>
+    </div>
+    <br>
+    <p>In this example the interpolation directive {{myData.textf()}} will call the myData.textf() function on the $scope model object, and insert the text returned from that function into the HTML template.
+    The textf() function is inserted into the $scope.myData object inside the controller function, as you can see in the example.</p>
+    <hr>
+    <h2>ng-bind Directive</h2>
+    <p>The ng-bind directive is an alternative to the interpolation directive. You use it by inserting an ng-bind attribute into the HTML element you want AngularJS to insert data into.</p>
+    <h4 class="text-primary">Example</h4>
+    <div ng-controller="MyController" >
+      <label>{{myData.textf()}}</label>
+    </div>
+    <br>
+    <p>This will insert the data returned from the myData.textf() function into the body of the span element. Notice how the {{ }} are not necessary around the expression inside the ng-bind attribute.</p>
+
+    
+    <!--Script block-->
+    
+    <script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script data-require="bootstrap@3.3.7" data-semver="3.3.7" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
